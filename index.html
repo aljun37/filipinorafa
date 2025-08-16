@@ -15,28 +15,32 @@
         background: #fff; 
         padding: 20px; 
         border-radius: 10px; 
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        box-shadow: 0 0 20px rgba(0,0,0,0.2); /* stronger box shadow */
+        position: relative;
     }
-    h2 { 
-        text-align: center; 
-        margin-top: 10px; 
-        color: #006633; /* dark green */
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
     }
     .logo {
-        display: block;
-        margin: 0 auto 20px auto;
-        width: 180px;
-        height: 180px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%; /* circle */
         object-fit: cover;
-        border: 6px solid #00994d; /* green border/frame */
-        box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        border: 4px solid #00994d; /* green border/frame */
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        margin-right: 15px;
+    }
+    h2 { 
+        margin: 0;
+        color: #006633; /* dark green */
     }
     .section-label {
         font-size: 1.3em;
         font-weight: bold;
         color: #00994d;
-        margin-bottom: 15px;
+        margin: 15px 0;
         text-align: center;
         border-bottom: 2px solid #00994d;
         padding-bottom: 5px;
@@ -74,8 +78,10 @@
 </head>
 <body>
 <div class="container">
-    <img src="rafa.jpg" alt="Logo" class="logo" />
-    <h2>Pagsusulit sa Wika</h2>
+    <div class="header">
+        <img src="rafa.jpg" alt="Logo" class="logo" />
+        <h2>Pagsusulit sa Wika</h2>
+    </div>
     <div class="section-label" id="sectionLabel"></div>
     <div id="quiz-section"></div>
     <button id="btnCheck">Sagot</button>
@@ -152,7 +158,7 @@ let pangUriQuestions = [
     {Text: "May isang malaking palasyo sa bayan.", Word: "isang", Type: "Pamilang"}
 ];
 
-// Shuffle function
+// Shuffle
 function shuffle(array){
     for(let i = array.length-1; i > 0; i--){
         let j = Math.floor(Math.random() * (i + 1));
@@ -164,9 +170,7 @@ shuffle(tayutayQuestions);
 shuffle(pangUriQuestions);
 
 // Globals
-let section = 1; // 1=Pamilang, 2=Tayutay, 3=Uri ng Pang-uri
-let currentIndex = 0;
-
+let section = 1, currentIndex = 0;
 let scorePamilang = 0, wrongPamilang = 0;
 let scoreTayutay = 0, wrongTayutay = 0;
 let scorePangUri = 0, wrongPangUri = 0;
@@ -186,17 +190,14 @@ function updateSectionLabel(){
     else sectionLabel.textContent = "";
 }
 
-// Show question
+// Show Question
 function showQuestion(){
     lblResult.textContent = "";
     quizDiv.innerHTML = "";
     updateSectionLabel();
     let q;
-
     if(section === 1){
-        if(currentIndex >= pamilangQuestions.length){
-            section = 2; currentIndex = 0; showQuestion(); return;
-        }
+        if(currentIndex >= pamilangQuestions.length){ section = 2; currentIndex = 0; showQuestion(); return; }
         q = pamilangQuestions[currentIndex];
         quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
         <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pamilang" /> 
@@ -209,9 +210,7 @@ function showQuestion(){
         </select>`;
     }
     else if(section === 2){
-        if(currentIndex >= tayutayQuestions.length){
-            section = 3; currentIndex = 0; showQuestion(); return;
-        }
+        if(currentIndex >= tayutayQuestions.length){ section = 3; currentIndex = 0; showQuestion(); return; }
         q = tayutayQuestions[currentIndex];
         quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
         <select id="cmbType">
@@ -241,24 +240,18 @@ function checkAnswer(){
         userWord = document.getElementById("txtAnswer").value.trim();
         userType = document.getElementById("cmbType").value;
         if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
-            lblResult.style.color = "green"; lblResult.textContent = "Tama!";
-            scorePamilang++;
+            lblResult.style.color = "green"; lblResult.textContent = "Tama!"; scorePamilang++;
         } else {
-            lblResult.style.color = "red"; 
-            lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`;
-            wrongPamilang++;
+            lblResult.style.color = "red"; lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`; wrongPamilang++;
         }
     }
     else if(section === 2){
         q = tayutayQuestions[currentIndex];
         userType = document.getElementById("cmbType").value;
         if(userType === q.Answer){
-            lblResult.style.color = "green"; lblResult.textContent = "Tama!";
-            scoreTayutay++;
+            lblResult.style.color = "green"; lblResult.textContent = "Tama!"; scoreTayutay++;
         } else {
-            lblResult.style.color = "red"; 
-            lblResult.textContent = `Mali! Tamang sagot: '${q.Answer}'`;
-            wrongTayutay++;
+            lblResult.style.color = "red"; lblResult.textContent = `Mali! Tamang sagot: '${q.Answer}'`; wrongTayutay++;
         }
     }
     else if(section === 3){
@@ -266,12 +259,9 @@ function checkAnswer(){
         userWord = document.getElementById("txtAnswer").value.trim();
         userType = document.getElementById("cmbType").value;
         if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
-            lblResult.style.color = "green"; lblResult.textContent = "Tama!";
-            scorePangUri++;
+            lblResult.style.color = "green"; lblResult.textContent = "Tama!"; scorePangUri++;
         } else {
-            lblResult.style.color = "red"; 
-            lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`;
-            wrongPangUri++;
+            lblResult.style.color = "red"; lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`; wrongPangUri++;
         }
     }
     btnCheck.disabled = true;
@@ -303,7 +293,6 @@ function showFinalResult(){
 // Init
 btnCheck.addEventListener("click", checkAnswer);
 btnNext.addEventListener("click", nextQuestion);
-
 btnNext.disabled = true;
 showQuestion();
 </script>

@@ -4,93 +4,116 @@
 <meta charset="UTF-8" />
 <title>Pagsusulit sa Wika</title>
 <style>
-  body { 
-    font-family: 'Comic Sans MS', cursive, sans-serif; 
-    background-color: #cce6ff; 
-    padding: 20px; 
-  }
-  .container { 
-    max-width: 700px; 
-    margin: auto; 
-    background: #fff; 
-    padding: 30px 40px; 
-    border-radius: 15px; 
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  .logo {
-    display: block;
-    margin: 0 auto 15px auto;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 3px solid #007bff;
-    object-fit: cover;
-  }
-  h2 {
-    font-size: 2.2em;
-    color: #007bff;
-    margin-bottom: 5px;
-  }
-  #sectionLabel {
-    font-size: 1.3em;
-    color: #004a99;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  .question {
-    text-align: left;
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-bottom: 10px;
-  }
-  input[type=text], select {
-    font-size: 1em;
-    padding: 8px;
-    margin-right: 10px;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    width: 45%;
-    box-sizing: border-box;
-  }
-  button {
-    font-size: 1.1em;
-    padding: 10px 25px;
-    margin: 15px 8px 0 0;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:disabled {
-    background-color: #a6c8ff;
-    cursor: default;
-  }
-  button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  #lblResult {
-    font-weight: bold;
-    margin-top: 15px;
-    min-height: 22px;
-  }
+    body {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        background-color: #DFF2E1; /* Light green pastel */
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        max-width: 700px;
+        width: 100%;
+        background: #fff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+    h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #2a7a2a; /* dark green */
+        margin-bottom: 10px;
+    }
+    .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #2a7a2a;
+        box-shadow: 0 0 5px rgba(42, 122, 42, 0.5);
+    }
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .section-label {
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #317831;
+        border-bottom: 2px solid #317831;
+        padding-bottom: 5px;
+    }
+    .question {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        color: #444;
+    }
+    .result {
+        font-weight: bold;
+        margin-top: 15px;
+        font-size: 1.1rem;
+    }
+    button {
+        padding: 10px 24px;
+        margin-top: 15px;
+        margin-right: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #2a7a2a;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(42, 122, 42, 0.4);
+        transition: background-color 0.3s ease;
+    }
+    button:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+    button:hover:not(:disabled) {
+        background-color: #1f5c1f;
+    }
+    select, input[type=text] {
+        padding: 6px 8px;
+        font-size: 1rem;
+        margin-top: 5px;
+        margin-right: 10px;
+        border: 2px solid #2a7a2a;
+        border-radius: 6px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+    select:focus, input[type=text]:focus {
+        border-color: #1f5c1f;
+    }
 </style>
 </head>
 <body>
-  <div class="container">
-    <img src="rafa.jpg" alt="Rafa Logo" class="logo" />
+<div class="container">
+    <div class="logo">
+        <img src="rafa.jpg" alt="Logo" />
+    </div>
     <h2>Pagsusulit sa Wika</h2>
-    <div id="sectionLabel">Seksiyon 1: Pamilang</div>
+    <div class="section-label" id="sectionLabel">Seksyon 1: Pamilang</div>
     <div id="quiz-section"></div>
     <button id="btnCheck">Sagot</button>
-    <button id="btnNext" disabled>Susunod</button>
-    <div id="lblResult"></div>
-  </div>
+    <button id="btnNext">Susunod</button>
+    <div class="result" id="lblResult"></div>
+</div>
 
 <script>
-// ==== Section Questions ====
+// ==== Section 1: Pamilang (20 questions) ====
 let pamilangQuestions = [
     {Text: "May tatlong ibon sa sanga ng puno.", Word: "tatlong", Type: "Kardinal"},
     {Text: "Si Liza ay may apat na kapatid.", Word: "apat", Type: "Kardinal"},
@@ -114,6 +137,7 @@ let pamilangQuestions = [
     {Text: "Bumili si Nanay ng isang dosenang itlog.", Word: "isang dosenang", Type: "Palansak"}
 ];
 
+// ==== Section 2: Tayutay (20 questions) ====
 let tayutayQuestions = [
     {Text: "Ang kanyang mga mata ay parang bituin sa gabi.", Answer: "Simili"},
     {Text: "Siya ay leon sa tapang.", Answer: "Metapora"},
@@ -137,6 +161,7 @@ let tayutayQuestions = [
     {Text: "Ang kanyang boses ay parang kampana.", Answer: "Simili"}
 ];
 
+// ==== Section 3: Uri ng Pang-uri (20 questions) ====
 let pangUriQuestions = [
     {Text: "May limang masayang bata sa parke.", Word: "limang", Type: "Pamilang"},
     {Text: "Ang batang masaya ay lumapit sa nanay.", Word: "masaya", Type: "Panlarawan"},
@@ -160,7 +185,7 @@ let pangUriQuestions = [
     {Text: "May isang malaking palasyo sa bayan.", Word: "isang", Type: "Pamilang"}
 ];
 
-// Shuffle questions
+// ==== Shuffle function ====
 function shuffle(array){
     for(let i = array.length-1; i > 0; i--){
         let j = Math.floor(Math.random() * (i + 1));
@@ -171,150 +196,152 @@ shuffle(pamilangQuestions);
 shuffle(tayutayQuestions);
 shuffle(pangUriQuestions);
 
-// Globals
+// ==== Globals ====
 let section = 1; // 1=Pamilang, 2=Tayutay, 3=Uri ng Pang-uri
 let currentIndex = 0;
 
-let scorePamilang = 0, wrongPamilang = 0;
-let scoreTayutay = 0, wrongTayutay = 0;
-let scorePangUri = 0, wrongPangUri = 0;
+let scorePamilang = 0;
+let wrongPamilang = 0;
 
+let scoreTayutay = 0;
+let wrongTayutay = 0;
+
+let scorePangUri = 0;
+let wrongPangUri = 0;
+
+// ==== HTML References ====
 const quizDiv = document.getElementById("quiz-section");
 const lblResult = document.getElementById("lblResult");
 const btnCheck = document.getElementById("btnCheck");
 const btnNext = document.getElementById("btnNext");
 const sectionLabel = document.getElementById("sectionLabel");
 
-// Show Question
+// ==== Show Question ====
 function showQuestion(){
-  lblResult.textContent = "";
-  btnNext.disabled = true;
-  btnCheck.disabled = false;
-  quizDiv.innerHTML = "";
+    lblResult.textContent = "";
+    quizDiv.innerHTML = "";
 
-  let q;
-  if(section === 1){
-    if(currentIndex >= pamilangQuestions.length){
-      section = 2;
-      currentIndex = 0;
-      sectionLabel.textContent = "Seksiyon 2: Tayutay";
-      showQuestion();
-      return;
+    // Update section label
+    if(section === 1){
+        sectionLabel.textContent = "Seksyon 1: Pamilang";
+    } else if(section === 2){
+        sectionLabel.textContent = "Seksyon 2: Tayutay";
+    } else if(section === 3){
+        sectionLabel.textContent = "Seksyon 3: Uri ng Pang-uri";
     }
-    q = pamilangQuestions[currentIndex];
-    sectionLabel.textContent = "Seksiyon 1: Pamilang";
-    quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-      <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pamilang" /> 
-      <select id="cmbType">
-        <option value="">--Piliin ang Uri--</option>
-        <option value="Kardinal">Kardinal</option>
-        <option value="Ordinal">Ordinal</option>
-        <option value="Pamahagi">Pamahagi</option>
-        <option value="Palansak">Palansak</option>
-      </select>`;
-  }
-  else if(section === 2){
-    if(currentIndex >= tayutayQuestions.length){
-      section = 3;
-      currentIndex = 0;
-      sectionLabel.textContent = "Seksiyon 3: Uri ng Pang-uri";
-      showQuestion();
-      return;
+
+    let question, inputHtml;
+
+    if(section === 1){
+        question = pamilangQuestions[currentIndex];
+        inputHtml = `
+            <div class="question">${question.Text}</div>
+            <label>Piliin ang tamang uri ng pamilang:</label>
+            <select id="answer">
+                <option value="">--Piliin--</option>
+                <option value="Kardinal">Kardinal</option>
+                <option value="Ordinal">Ordinal</option>
+                <option value="Pamahagi">Pamahagi</option>
+                <option value="Palansak">Palansak</option>
+            </select>`;
     }
-    q = tayutayQuestions[currentIndex];
-    sectionLabel.textContent = "Seksiyon 2: Tayutay";
-    quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-      <select id="cmbType">
-        <option value="">--Piliin ang Uri--</option>
-        <option value="Simili">Simili</option>
-        <option value="Metapora">Metapora</option>
-      </select>`;
-  }
-  else if(section === 3){
-    if(currentIndex >= pangUriQuestions.length){
-      showFinalResult();
-      return;
+    else if(section === 2){
+        question = tayutayQuestions[currentIndex];
+        inputHtml = `
+            <div class="question">${question.Text}</div>
+            <label>Piliin ang tamang sagot:</label>
+            <select id="answer">
+                <option value="">--Piliin--</option>
+                <option value="Simili">Simili</option>
+                <option value="Metapora">Metapora</option>
+            </select>`;
     }
-    q = pangUriQuestions[currentIndex];
-    sectionLabel.textContent = "Seksiyon 3: Uri ng Pang-uri";
-    quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-      <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pang-uri (pamilang o panlarawan)" /> 
-      <select id="cmbType">
-        <option value="">--Piliin ang Uri ng Pang-uri--</option>
-        <option value="Pamilang">Pamilang</option>
-        <option value="Panlarawan">Panlarawan</option>
-      </select>`;
-  }
+    else if(section === 3){
+        question = pangUriQuestions[currentIndex];
+        inputHtml = `
+            <div class="question">${question.Text}</div>
+            <label>Piliin ang tamang uri ng pang-uri o pamilang:</label>
+            <select id="answer">
+                <option value="">--Piliin--</option>
+                <option value="Panlarawan">Panlarawan</option>
+                <option value="Pamilang">Pamilang</option>
+            </select>`;
+    }
+
+    quizDiv.innerHTML = inputHtml;
+    btnCheck.disabled = false;
+    btnNext.disabled = true;
 }
 
-// Check Answer
-function checkAnswer(){
-  let q, userWord, userType;
-  if(section === 1){
-    q = pamilangQuestions[currentIndex];
-    userWord = document.getElementById("txtAnswer").value.trim();
-    userType = document.getElementById("cmbType").value;
-    if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
-      lblResult.style.color = "green"; 
-      lblResult.textContent = "Tama!";
-      scorePamilang++;
-    } else {
-      lblResult.style.color = "red"; 
-      lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`;
-      wrongPamilang++;
+// ==== Check Answer ====
+btnCheck.addEventListener("click", () => {
+    const answerSelect = document.getElementById("answer");
+    if(!answerSelect.value){
+        alert("Piliin muna ang sagot.");
+        return;
     }
-  }
-  else if(section === 2){
-    q = tayutayQuestions[currentIndex];
-    userType = document.getElementById("cmbType").value;
-    if(userType === q.Answer){
-      lblResult.style.color = "green"; 
-      lblResult.textContent = "Tama!";
-      scoreTayutay++;
-    } else {
-      lblResult.style.color = "red"; 
-      lblResult.textContent = `Mali! Tamang sagot: '${q.Answer}'`;
-      wrongTayutay++;
-    }
-  }
-  else if(section === 3){
-    q = pangUriQuestions[currentIndex];
-    userWord = document.getElementById("txtAnswer").value.trim();
-    userType = document.getElementById("cmbType").value;
-    if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
-      lblResult.style.color = "green"; 
-      lblResult.textContent = "Tama!";
-      scorePangUri++;
-    } else {
-      lblResult.style.color = "red"; 
-      lblResult.textContent = `Mali! Tamang sagot: '${q.Word}' (${q.Type})`;
-      wrongPangUri++;
-    }
-  }
-  btnCheck.disabled = true;
-  btnNext.disabled = false;
-}
 
-// Show final result
-function showFinalResult(){
-  quizDiv.innerHTML = "";
-  sectionLabel.textContent = "Tapos na ang Pagsusulit!";
-  lblResult.style.color = "#000";
-  lblResult.innerHTML = `<h3>Mga Resulta:</h3>
-    <p><strong>Pamilang:</strong> Tama ${scorePamilang}, Mali ${wrongPamilang}</p>
-    <p><strong>Tayutay:</strong> Tama ${scoreTayutay}, Mali ${wrongTayutay}</p>
-    <p><strong>Uri ng Pang-uri:</strong> Tama ${scorePangUri}, Mali ${wrongPangUri}</p>`;
-  btnCheck.style.display = "none";
-  btnNext.style.display = "none";
-}
+    let question;
+    if(section === 1) question = pamilangQuestions[currentIndex];
+    else if(section === 2) question = tayutayQuestions[currentIndex];
+    else if(section === 3) question = pangUriQuestions[currentIndex];
 
-// Event Listeners
-btnCheck.addEventListener("click", checkAnswer);
-btnNext.addEventListener("click", () => {
-  currentIndex++;
-  showQuestion();
+    let correctAnswer;
+    if(section === 1) correctAnswer = question.Type;
+    else if(section === 2) correctAnswer = question.Answer;
+    else if(section === 3) correctAnswer = question.Type;
+
+    if(answerSelect.value === correctAnswer){
+        lblResult.textContent = "Tama!";
+        if(section === 1) scorePamilang++;
+        else if(section === 2) scoreTayutay++;
+        else if(section === 3) scorePangUri++;
+    } else {
+        lblResult.textContent = `Mali! Ang tamang sagot ay "${correctAnswer}".`;
+        if(section === 1) wrongPamilang++;
+        else if(section === 2) wrongTayutay++;
+        else if(section === 3) wrongPangUri++;
+    }
+
+    btnCheck.disabled = true;
+    btnNext.disabled = false;
 });
 
+// ==== Next Question or Section ====
+btnNext.addEventListener("click", () => {
+    currentIndex++;
+    let maxQ;
+
+    if(section === 1) maxQ = pamilangQuestions.length;
+    else if(section === 2) maxQ = tayutayQuestions.length;
+    else if(section === 3) maxQ = pangUriQuestions.length;
+
+    if(currentIndex >= maxQ){
+        if(section < 3){
+            alert(`Natapos mo na ang Seksyon ${section}!\nPumunta tayo sa susunod.`);
+            section++;
+            currentIndex = 0;
+            lblResult.textContent = "";
+        } else {
+            alert(`Natapos mo na ang lahat ng pagsusulit!\n
+Seksyon 1 - Tama: ${scorePamilang}, Mali: ${wrongPamilang}
+Seksyon 2 - Tama: ${scoreTayutay}, Mali: ${wrongTayutay}
+Seksyon 3 - Tama: ${scorePangUri}, Mali: ${wrongPangUri}
+Salamat sa iyong pagsagot!`);
+            // Restart or reload the quiz
+            section = 1;
+            currentIndex = 0;
+            scorePamilang = 0; wrongPamilang = 0;
+            scoreTayutay = 0; wrongTayutay = 0;
+            scorePangUri = 0; wrongPangUri = 0;
+        }
+    }
+    showQuestion();
+    btnCheck.disabled = false;
+    btnNext.disabled = true;
+});
+
+// ==== Start ====
 showQuestion();
 </script>
 </body>

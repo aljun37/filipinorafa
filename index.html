@@ -71,28 +71,28 @@ let tayutayQuestions = [
     {Text: "Ang kanyang boses ay parang kampana.", Answer: "Simili"}
 ];
 
-// ==== Section 3: Uri ng Pang-uri (20 questions) ====
+// ==== Section 3: Pang-uri ng Pamilang at Uri ng Pang-uri (20 questions) ====
 let pangUriQuestions = [
-    {Text: "May limang masayang bata sa parke.", Word: "limang", Type: "Pamilang"},
-    {Text: "Ang batang masaya ay lumapit sa nanay.", Word: "masaya", Type: "Panlarawan"},
-    {Text: "Nakakita ako ng isang malaking aso.", Word: "malaking", Type: "Panlarawan"},
-    {Text: "Bumili siya ng tatlong kendi.", Word: "tatlong", Type: "Pamilang"},
-    {Text: "May magandang tanawin sa Baguio.", Word: "magandang", Type: "Panlarawan"},
-    {Text: "Ang ikatlong upuan ay sira na.", Word: "ikatlong", Type: "Pamilang"},
-    {Text: "Ang maingay na bata ay lumabas.", Word: "maingay", Type: "Panlarawan"},
-    {Text: "May dalawang ibon sa hawla.", Word: "dalawang", Type: "Pamilang"},
-    {Text: "Masarap ang bagong lutong pansit.", Word: "bagong", Type: "Panlarawan"},
-    {Text: "Bumili siya ng pitong tinapay.", Word: "pitong", Type: "Pamilang"},
-    {Text: "Ang luma at sirang upuan ay itinapon.", Word: "luma", Type: "Panlarawan"},
-    {Text: "Siya ay may anim na alagang pusa.", Word: "anim", Type: "Pamilang"},
-    {Text: "Ang maputi niyang buhok ay kumikislap.", Word: "maputi", Type: "Panlarawan"},
-    {Text: "May apat na estudyante sa silid.", Word: "apat", Type: "Pamilang"},
-    {Text: "Ang malamig na hangin ay dumaan.", Word: "malamig", Type: "Panlarawan"},
-    {Text: "Kumain sila ng walong mangkok ng lugaw.", Word: "walong", Type: "Pamilang"},
-    {Text: "Ang matamis na prutas ay paborito ko.", Word: "matamis", Type: "Panlarawan"},
-    {Text: "Siya ang pangalawang dumating sa laro.", Word: "pangalawang", Type: "Pamilang"},
-    {Text: "Ang mahabang kwento ay naantala.", Word: "mahabang", Type: "Panlarawan"},
-    {Text: "May isang malaking palasyo sa bayan.", Word: "isang", Type: "Pamilang"}
+    {Text: "Si Ana ay may tatlong masayang aso.", Word: "tatlong", Type: "Pamilang"},
+    {Text: "Ang malaking bahay ay bago pa lang.", Word: "malaking", Type: "Panlarawan"},
+    {Text: "May limang pulang rosas sa hardin.", Word: "limang", Type: "Pamilang"},
+    {Text: "Ang malamig na tubig ay nakakapresko.", Word: "malamig", Type: "Panlarawan"},
+    {Text: "Bumili siya ng pitong bagong libro.", Word: "pitong", Type: "Pamilang"},
+    {Text: "Ang makinis na tela ay maganda.", Word: "makinis", Type: "Panlarawan"},
+    {Text: "May dalawang matatalinong estudyante.", Word: "dalawang", Type: "Pamilang"},
+    {Text: "Ang matapang na sundalo ay nagtagumpay.", Word: "matapang", Type: "Panlarawan"},
+    {Text: "Si Liza ay may apat na malalaking mansanas.", Word: "apat", Type: "Pamilang"},
+    {Text: "Ang masayang bata ay tumawa.", Word: "masayang", Type: "Panlarawan"},
+    {Text: "Nakita ko ang anim na batang lalaki.", Word: "anim", Type: "Pamilang"},
+    {Text: "Ang pulang bola ay nasa mesa.", Word: "pulang", Type: "Panlarawan"},
+    {Text: "May siyam na masasarap na prutas.", Word: "siyam", Type: "Pamilang"},
+    {Text: "Ang malinis na kwarto ay maaliwalas.", Word: "malinis", Type: "Panlarawan"},
+    {Text: "Bumili siya ng sampung bagong sapatos.", Word: "sampung", Type: "Pamilang"},
+    {Text: "Ang magandang tanawin ay kahanga-hanga.", Word: "magandang", Type: "Panlarawan"},
+    {Text: "May walong matatapang na sundalo.", Word: "walong", Type: "Pamilang"},
+    {Text: "Ang matamis na mangga ay hinog.", Word: "matamis", Type: "Panlarawan"},
+    {Text: "Nakita ko ang tatlong bilog na lobo.", Word: "tatlong", Type: "Pamilang"},
+    {Text: "Ang mabilis na aso ay tumakbo.", Word: "mabilis", Type: "Panlarawan"}
 ];
 
 // ==== Shuffle function ====
@@ -107,16 +107,13 @@ shuffle(tayutayQuestions);
 shuffle(pangUriQuestions);
 
 // ==== Globals ====
-let section = 1; // 1=Pamilang, 2=Tayutay, 3=Uri ng Pang-uri
+let section = 1; // 1=Pamilang, 2=Tayutay, 3=Pang-uri
 let currentIndex = 0;
-
 let scorePamilang = 0;
-let wrongPamilang = 0;
-
 let scoreTayutay = 0;
-let wrongTayutay = 0;
-
 let scorePangUri = 0;
+let wrongPamilang = 0;
+let wrongTayutay = 0;
 let wrongPangUri = 0;
 
 // ==== HTML References ====
@@ -133,36 +130,34 @@ function showQuestion(){
 
     if(section === 1){
         if(currentIndex >= pamilangQuestions.length){
-            section = 2;
-            currentIndex = 0;
+            section = 2; currentIndex = 0; 
             showQuestion();
             return;
         }
         q = pamilangQuestions[currentIndex];
         quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-        <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pamilang" /> 
-        <select id="cmbType">
-            <option value="">--Piliin ang Uri--</option>
-            <option value="Kardinal">Kardinal</option>
-            <option value="Ordinal">Ordinal</option>
-            <option value="Pamahagi">Pamahagi</option>
-            <option value="Palansak">Palansak</option>
-        </select>`;
+            <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pamilang" /> 
+            <select id="cmbType">
+                <option value="">--Piliin ang Uri--</option>
+                <option value="Kardinal">Kardinal</option>
+                <option value="Ordinal">Ordinal</option>
+                <option value="Pamahagi">Pamahagi</option>
+                <option value="Palansak">Palansak</option>
+            </select>`;
     }
     else if(section === 2){
         if(currentIndex >= tayutayQuestions.length){
-            section = 3;
-            currentIndex = 0;
+            section = 3; currentIndex = 0; 
             showQuestion();
             return;
         }
         q = tayutayQuestions[currentIndex];
         quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-        <select id="cmbType">
-            <option value="">--Piliin ang Uri--</option>
-            <option value="Simili">Simili</option>
-            <option value="Metapora">Metapora</option>
-        </select>`;
+            <select id="cmbType">
+                <option value="">--Piliin ang Uri--</option>
+                <option value="Simili">Simili</option>
+                <option value="Metapora">Metapora</option>
+            </select>`;
     }
     else if(section === 3){
         if(currentIndex >= pangUriQuestions.length){
@@ -171,22 +166,24 @@ function showQuestion(){
         }
         q = pangUriQuestions[currentIndex];
         quizDiv.innerHTML = `<div class="question">${currentIndex + 1}. ${q.Text}</div>
-        <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pang-uri (pamilang)" /> 
-        <select id="cmbType">
-            <option value="">--Piliin ang Uri ng Pang-uri--</option>
-            <option value="Pamilang">Pamilang</option>
-            <option value="Panlarawan">Panlarawan</option>
-        </select>`;
+            <input type="text" id="txtAnswer" placeholder="Isulat ang salitang pang-uri (pamilang)" /> 
+            <select id="cmbType">
+                <option value="">--Piliin ang Uri ng Pang-uri--</option>
+                <option value="Pamilang">Pamilang</option>
+                <option value="Panlarawan">Panlarawan</option>
+            </select>`;
     }
 }
 
 // ==== Check Answer ====
 function checkAnswer(){
     let q, userWord, userType;
+
     if(section === 1){
         q = pamilangQuestions[currentIndex];
         userWord = document.getElementById("txtAnswer").value.trim();
         userType = document.getElementById("cmbType").value;
+
         if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
             lblResult.style.color = "green"; 
             lblResult.textContent = "Tama!";
@@ -200,6 +197,7 @@ function checkAnswer(){
     else if(section === 2){
         q = tayutayQuestions[currentIndex];
         userType = document.getElementById("cmbType").value;
+
         if(userType === q.Answer){
             lblResult.style.color = "green"; 
             lblResult.textContent = "Tama!";
@@ -214,6 +212,7 @@ function checkAnswer(){
         q = pangUriQuestions[currentIndex];
         userWord = document.getElementById("txtAnswer").value.trim();
         userType = document.getElementById("cmbType").value;
+
         if(userWord.toLowerCase() === q.Word.toLowerCase() && userType === q.Type){
             lblResult.style.color = "green"; 
             lblResult.textContent = "Tama!";
@@ -227,7 +226,7 @@ function checkAnswer(){
 }
 
 // ==== Next Question ====
-btnNext.addEventListener("click", ()=>{
+btnNext.addEventListener("click", () => {
     currentIndex++;
     showQuestion();
 });
@@ -238,18 +237,17 @@ function showFinalResult(){
     let totalQ = pamilangQuestions.length + tayutayQuestions.length + pangUriQuestions.length;
     let totalScore = scorePamilang + scoreTayutay + scorePangUri;
     let perc = Math.round((totalScore / totalQ) * 100);
-    let remark = (perc >= 75) ? "PASADO" : "BAGSAK";
-    quizDiv.innerHTML = `<h3>Resulta ng Pagsusulit</h3>
-    <p>Pamilang - Tama: ${scorePamilang}, Mali: ${wrongPamilang}</p>
-    <p>Tayutay - Tama: ${scoreTayutay}, Mali: ${wrongTayutay}</p>
-    <p>Uri ng Pang-uri - Tama: ${scorePangUri}, Mali: ${wrongPangUri}</p>
-    <p>Kabuuang Score: ${totalScore} / ${totalQ} (${perc}%)</p>
-    <p><strong>Remark: ${remark}</strong></p>`;
+    quizDiv.innerHTML = `<h3>Salamat sa pagsagot!</h3>
+        <p>Mga tanong: ${totalQ}</p>
+        <p>Tamang sagot: ${totalScore}</p>
+        <p>Maling sagot: ${wrongPamilang + wrongTayutay + wrongPangUri}</p>
+        <p>Porsyento: ${perc}%</p>`;
+    lblResult.textContent = "";
     btnCheck.disabled = true;
     btnNext.disabled = true;
 }
 
-// ==== Start Quiz ====
+// ==== Initialize ====
 showQuestion();
 </script>
 </body>
